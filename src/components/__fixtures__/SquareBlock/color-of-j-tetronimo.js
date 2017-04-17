@@ -1,9 +1,7 @@
 import { COLORS } from '../../../constants/tetronimo'
 
-const res = {
+export default {
   props: {
-    color: COLORS.I
+    color: COLORS.J
   }
 }
-
-export default res
