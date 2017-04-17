@@ -141,10 +141,12 @@ const reducers = {
 }
 
 // export default without naming it, why did'nt I think of that(???)
-export default (state, action) => {
-  if (typeof state === 'undefined') {
-    return newGame.reduxState.game
-  }
+const initialState = {
+  gameState: STOPPED,
+  score: 0,
+  lines: 0
+}
 
+export default (state = initialState, action) => {
   return action.type in reducers ? reducers[action.type](state, action) : state
 }

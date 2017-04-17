@@ -1,15 +1,10 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import { thunk } from 'redux-thunk'
+import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import createReduxProxy from 'react-cosmos-redux-proxy'
 import initLayout, { layoutReducer } from 'react-redux-layout'
 import computeLayout from '../src/layout'
-
-// just passing through, no data was harmed by this reducer
-const gameReducer = (state, action) => {
-  console.log(action)
-  return state
-}
+import gameReducer from './reducers/game'
 
 const rootReducer = combineReducers({
   game: gameReducer,

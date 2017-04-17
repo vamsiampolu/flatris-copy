@@ -26,7 +26,7 @@ export default ({width, height}) => {
     padding: getRelSize(20)
   }
 
-  return {
+  const res = {
     width,
     height,
     blockSize,
@@ -58,4 +58,6 @@ export default ({width, height}) => {
       fontSize: getRelSize(12, 2)
     }
   }
+  console.log(res)
+  return res
 }
