@@ -20,8 +20,8 @@ export const rotate = grid => {
   return matrix
 }
 
-export const getExactPosition = (x, y) => {
-  return { x: Math.floor(x), y: Math.floor(y) }
+export const getExactPosition = ({x, y}) => {
+  return {x: Math.floor(x), y: Math.floor(y)}
 }
 
 export const isPositionAvailable = (grid, tetronimoGrid, position) => {
@@ -66,10 +66,10 @@ export const isPositionAvailable = (grid, tetronimoGrid, position) => {
 
 export const getBottomMostPosition = (grid, tetronimoGrid, position) => {
   let y = Math.floor(position.y)
-  while (!isPositionAvailable(grid, tetronimoGrid, { x: position.x, y })) {
+  while (!isPositionAvailable(grid, tetronimoGrid, {x: position.x, y})) {
     y = y - 1
   }
-  return Object.assign({}, position, { y })
+  return Object.assign({}, position, {y})
 }
 
 const createEmptyLine = cols => [...Array(cols)].map(() => null)
@@ -98,11 +98,15 @@ export const clearLines = grid => {
     }
   }
 
-  return { clearedGrid, linesCleared }
+  return {clearedGrid, linesCleared}
 }
 
-export const fitTetronimoPositionInWellBounds = (grid, tetronimoGrid, position) => {
-  const { x, y } = position
+export const fitTetronimoPositionInWellBounds = (
+  grid,
+  tetronimoGrid,
+  position
+) => {
+  const {x, y} = position
   const cols = grid[0].length
   const tetronimoRows = tetronimoGrid.length
   const tetronimoCols = tetronimoGrid[0].length
@@ -124,6 +128,5 @@ export const fitTetronimoPositionInWellBounds = (grid, tetronimoGrid, position) 
     }
   }
 
-  return { x: newX, y }
+  return {x: newX, y}
 }
-

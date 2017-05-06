@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import SquareBlock from './SquareBlock'
 import styled from 'styled-components'
 
-const {number, arrayOf, array} = PropTypes
+const {number, array} = PropTypes
 
 const LI = styled.li`
   position: absolute;
@@ -43,7 +43,9 @@ const WellGridList = styled.ul`
 `
 
 export default class WellGrid extends React.Component {
-  // TODO add shouldComponentUpdate?
+  shouldComponentUpdate (nextProps) {
+    return nextProps.grid !== this.props.grid
+  }
 
   renderGridBlocks () {
     const {props} = this
@@ -60,7 +62,6 @@ export default class WellGrid extends React.Component {
       for (let col = 0; col < cols; col++) {
         if (grid[row][col]) {
           let blockValue = grid[row][col]
-          // TODO extract to seperate component
           blocks.push(
             <GridListItem
               widthPercent={widthPercent}

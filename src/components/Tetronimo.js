@@ -4,16 +4,20 @@ import PropTypes from 'prop-types'
 import uuid from 'uuid/v1'
 import SquareBlock from './SquareBlock'
 
-const { number, string, arrayOf } = PropTypes
+const {number, string, arrayOf} = PropTypes
 
 // Square blocks will transition their fall when lines are cleared beneath them
 const TetronimoBlock = styled.li`
   width: 25%;
   height: 25%;
   position: absolute;
-  top: ${props => ((props.row * 25) + '%')};
-  left: ${props => ((props.col * 25) + '%')};
+  top: ${props => props.row * 25 + '%'};
+  left: ${props => props.col * 25 + '%'};
   transition: top 0.1s linear;
+`
+
+const TetronimoBlocksContainer = styled.ul`
+  list-style-type: none;
 `
 
 TetronimoBlock.propTypes = {
@@ -21,8 +25,8 @@ TetronimoBlock.propTypes = {
   col: number
 }
 
-const Tetronimo = (props) => {
-  const { color, grid } = props
+const Tetronimo = props => {
+  const {color, grid} = props
   const rows = grid.length
   const cols = grid[0].length
   let blocks = []
@@ -30,14 +34,16 @@ const Tetronimo = (props) => {
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
       if (grid[row][col]) {
-        blocks.push(<TetronimoBlock row={row} col={col} key={uuid()} >
-          <SquareBlock color={color} />
-        </TetronimoBlock>)
+        blocks.push(
+          <TetronimoBlock row={row} col={col} key={uuid()}>
+            <SquareBlock color={color} />
+          </TetronimoBlock>
+        )
       }
     }
   }
 
-  return (<ul>{blocks}</ul>)
+  return <TetronimoBlocksContainer>{blocks}</TetronimoBlocksContainer>
 }
 
 Tetronimo.propTypes = {
