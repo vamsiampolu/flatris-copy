@@ -1,10 +1,11 @@
-import { WELL_ROWS, WELL_COLS } from './constants/grid'
+import {WELL_ROWS, WELL_COLS} from './constants/grid'
 
 const SIDE_COLS = 6
 const GAME_COLS = WELL_COLS + SIDE_COLS
-const { floor, round } = Math
+const {floor, round} = Math
 
-const roundToMultiOf = (value, multiOf) => multiOf === undefined ? value : multiOf * round(value / multiOf)
+const roundToMultiOf = (value, multiOf) =>
+  (multiOf === undefined ? value : multiOf * round(value / multiOf))
 
 export default ({width, height}) => {
   let blockSize = floor(height / (WELL_ROWS + 3))
@@ -19,7 +20,8 @@ export default ({width, height}) => {
   const landscape = width >= gameWidth * 2
 
   // values relative to block size of 30px
-  const getRelSize = (relValue, multiOf = 1) => roundToMultiOf(relValue * (blockSize / 30), multiOf)
+  const getRelSize = (relValue, multiOf = 1) =>
+    roundToMultiOf(relValue * (blockSize / 30), multiOf)
 
   const controls = {
     size: blockSize * 2,
@@ -32,7 +34,7 @@ export default ({width, height}) => {
     blockSize,
     landscape,
     fontSize: {
-      'default': getRelSize(14),
+      default: getRelSize(14),
       text: getRelSize(20),
       button: getRelSize(18),
       control: getRelSize(24),
@@ -58,6 +60,5 @@ export default ({width, height}) => {
       fontSize: getRelSize(12, 2)
     }
   }
-  console.log(res)
   return res
 }

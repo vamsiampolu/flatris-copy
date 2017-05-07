@@ -1,8 +1,8 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import createReduxProxy from 'react-cosmos-redux-proxy'
-import initLayout, { layoutReducer } from 'react-redux-layout'
+import initLayout, {layoutReducer} from 'react-redux-layout'
 import computeLayout from '../src/layout'
 import gameReducer from './reducers/game'
 
@@ -19,8 +19,12 @@ export default () => {
       if (_destroyLayout) {
         _destroyLayout()
       }
-      const store = createStore(rootReducer, initialState, applyMiddleware(thunk, logger))
-      _destroyLayout = initLayout({ store, computeLayout })
+      const store = createStore(
+        rootReducer,
+        initialState,
+        applyMiddleware(thunk, logger)
+      )
+      _destroyLayout = initLayout({store, computeLayout})
       return store
     }
   })
