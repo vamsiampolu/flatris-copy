@@ -34,9 +34,9 @@ export default {
         null
       ]
     ],
-    activeTetromino: 'T',
-    activeTetrominoGrid: SHAPES.T,
-    activeTetrominoPosition: {
+    activeTetronimo: 'T',
+    activeTetronimoGrid: SHAPES.T,
+    activeTetronimoPosition: {
       x: 2,
       y: 13.508750000000028
     }
