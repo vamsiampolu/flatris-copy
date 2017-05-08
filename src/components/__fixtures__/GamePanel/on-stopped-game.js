@@ -1,11 +1,11 @@
-import {PAUSED} from '../../../constants/states'
+import {STOPPED} from '../../../constants/states'
 
 export default {
   props: {
-    gameState: PAUSED,
-    score: 999,
-    lines: 123,
-    nextTetronimo: 'I',
+    gameState: STOPPED,
+    score: 0,
+    lines: 0,
+    nextTetronimo: null,
     onStart: () => console.log('Start'),
     onPause: () => console.log('Pause'),
     onResume: () => console.log('Resume')

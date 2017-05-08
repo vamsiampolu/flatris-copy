@@ -5,10 +5,10 @@ import styled from 'styled-components'
 
 import {STOPPED, PLAYING, PAUSED} from '../constants/states'
 import {SHAPES, COLORS} from '../constants/tetronimo'
-import {attachPointerDownEvent} from '../lib/events'
+import {attachPointerDown} from '../lib/events'
 
-import {Tetronimo} from './Tetronimo'
-import {Button} from './Button'
+import Tetronimo from './Tetronimo'
+import Button from './Button'
 
 const GamePanelRoot = styled.div`
   color: #34495f;
@@ -42,10 +42,15 @@ const Count = styled.p`
 `
 
 const NextTetronimoContainer = styled.div`
+  position: relative;
   transform: ${props => (props.nextTetronimo === 'I' ? 'translate(0, -25%)' : '')};
+
+  & > ul > li > div {
+    background-color: #ecf0f1 !important;
+  }
 `
 
-export class GamePanel extends React.Component {
+class GamePanel extends React.Component {
   renderGameButton () {
     const {props} = this
     const {gameState, onStart, onPause, onResume, styles} = props
@@ -69,7 +74,7 @@ export class GamePanel extends React.Component {
     return React.createElement(
       Button,
       {
-        ...attachPointerDownEvent(eventHandler),
+        ...attachPointerDown(eventHandler),
         style: styles.button
       },
       label
@@ -79,7 +84,13 @@ export class GamePanel extends React.Component {
   render () {
     const {props} = this
     const {score, lines, nextTetronimo, styles} = props
-    const {root, title, label, count} = styles
+    const {
+      root,
+      title,
+      label,
+      count,
+      nextTetronimo: nextTetronimoStyle
+    } = styles
     return (
       <GamePanelRoot style={root}>
         <Title style={title}>Flatris</Title>
@@ -89,7 +100,7 @@ export class GamePanel extends React.Component {
         <Count style={count}>{lines}</Count>
         <Label style={label}>Next shape</Label>
         {nextTetronimo
-          ? <NextTetronimoContainer style={nextTetronimo}>
+          ? <NextTetronimoContainer style={nextTetronimoStyle}>
               <Tetronimo
                 key={nextTetronimo}
                 color={COLORS[nextTetronimo]}
@@ -151,9 +162,11 @@ const getStyles = layout => {
   }
 }
 
-export default connect(state => {
+const mapStateToProps = state => {
   const {layout} = state
   return {
     styles: getStyles(layout)
   }
-})(GamePanel)
+}
+
+export default connect(mapStateToProps)(GamePanel)

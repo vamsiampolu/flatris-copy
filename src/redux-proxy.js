@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import createReduxProxy from 'react-cosmos-redux-proxy'
 import initLayout, {layoutReducer} from 'react-redux-layout'
-import computeLayout from '../src/layout'
+import computeLayout from './layout'
 import gameReducer from './reducers/game'
 
 const rootReducer = combineReducers({
@@ -25,6 +25,7 @@ export default () => {
         applyMiddleware(thunk, logger)
       )
       _destroyLayout = initLayout({store, computeLayout})
+      console.log(store.getState())
       return store
     }
   })
